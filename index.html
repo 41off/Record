@@ -14,9 +14,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-</head>
-
-<body>
 
 <style type="text/css" media="screen">
 body {
@@ -81,7 +78,7 @@ body {
 .timer {
     position:absolute;
     border:3px #666666 solid;
-    border-radius: 12px;
+    border-radius: 8px;
     background-color: black;
     line-height:30px;
     font-size:25px;
@@ -96,8 +93,8 @@ body {
     margin-bottom: 0px;
     display: block;
     min-width: 150px;
-    left:75%;    
-    top: 12%;
+    left:85%;    
+    top: 15%;
 }
 .timer:hover {
     border:3px red solid;
@@ -359,17 +356,45 @@ body {
 #timerbutton5 {
     background-color: transparent;
     font-weight: normal;
-    color: white; 
+    color: white;
+    border:3px; 
     border-color: transparent;
     border-radius: 10px;
     border-style:double;
     width: 160px;
 }
+
 #timerbutton5:hover {
     border-color: lime;
     background-color: blue; 
     color: white;
 }
+
+.timerbutton7 .tb2text {
+  display: inline-block;
+  visibility: hidden;
+  width: 80px;
+  height: 30px;
+  background-color: black;
+  border-color: silver;
+  color: white;
+  text-decoration:blink;
+  font-weight:normal;
+  margin-left:5px;
+  border-width:2px;
+  border-style:inset;
+  border-radius: 6px;
+  line-height: 25px;;
+  right: 40%;
+  top: 100%;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+.timerbutton7:hover .tb2text {
+  visibility: visible;
+}
+
 .timerbutton6 {
     background-color: silver; 
     color: white;
@@ -461,7 +486,7 @@ body {
     border-color: lime;
     border-radius: 12px;
     border-style: double;
-    height:250px;
+    height:275px;
     width:170px;
     font-family: "Arial Narrow", Arial, sans-serif;
     font-size: 18px;
@@ -470,14 +495,14 @@ body {
     opacity: .15;
     transition: opacity 60s;
     bottom: 100px;
-    top: 25%;
--webkit-animation: fadeout 45s; /* Safari, Chrome and Opera > 12.1 */
+    top: 15%;
+    -webkit-animation: fadeout 45s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadeout 45s; /* Firefox < 16 */
         -ms-animation: fadeout 45s; /* Internet Explorer */
          -o-animation: fadeout 45s; /* Opera < 12.1 */
             animation: fadeout 45s;  
   
--webkit-animation: fadein 5s; /* Safari, Chrome and Opera > 12.1 */
+    -webkit-animation: fadein 5s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 5s; /* Firefox < 16 */
         -ms-animation: fadein 5s; /* Internet Explorer */
          -o-animation: fadein 5s; /* Opera < 12.1 */
@@ -882,11 +907,15 @@ body {
 .closebtn2:hover .closeboxleft {
   visibility: visible;
 }
+/*
 ul li{float: left;
       width: 100%;  /*helps to determine number of columns, for instance 33.3% displays 3 columns*/
 }
+/*
 ul{list-style-type: disc; color:red
 }
+*/
+
  li a:link {font-size: 14px; color:#eeeedd; font-weight:bold; background:transparent; padding:2px; display:block; font-family: "Arial Narrow";}
  
  li a:active {color:red; font-family:"Arial Narrow";}
@@ -968,13 +997,6 @@ button[disabled] {
 button[disabled]:hover {
   background-color: transparent;
 }
-
-
-
-
-
-
-
 
 p {
   color: #444;
@@ -1071,6 +1093,23 @@ textarea {
   font-family: 'Roboto', sans-serif;
 }
 
+#start {
+    background-color: transparent;
+    font-weight: normal;
+    color: white;
+    border-width: 3px;
+    border-color: transparent;
+    border-radius: 10px;
+    border-style:double;
+    width: 160px;
+    height:30px;
+}
+#start:hover {
+    border-color: blue;
+    background-color: red; 
+    color: white;
+}
+
 video {
   position: relative;
   border:3px;
@@ -1087,27 +1126,28 @@ video {
 
 </style>
 
+</head>
 
 
 <body onload="onload();">
 
 <div id="stage">
 
-   
-
-    <video id="recorded" playsinline autoplay muted onclick="this.paused? ClickPause():ClickStart(); this.paused? timer.start(10):timer.stop(0)"></video>
+    <video id="recorded" playsinline  onclick= "this.paused? timer.stop(0):timer.start(10)"></video>
     
-    <div class="playlist" style="text-align:center">
+     <div class="playlist" style="text-align:center">
         <button class="playlistbutton" id="start"><li>Select Screen</li></button>
         <button class="playlistbutton" id="record" disabled><li>Start Recording</li></button>
         <button class="playlistbutton" id="play" disabled><li>Play</li></button>
         <button class="playlistbutton" id="download" disabled><li>Download</li></button>
         <button class="playlistbutton" onclick="window.location.reload(true)"><li>Re-Load Page</li></button>
-       </div>      
+        <button id="timerbutton5" class="timerbutton7" href="#" onclick="parent.location='HTML5_ArchivePLayer.html'"><li>Archives</li><span class="tb2text">Click to open Archive player.</span></button>
+      </div>      
     
 <!-- <video id="gum" playsinline loop onclick="this.paused? ClickPause():ClickStart(); this.paused? timer.start(10):timer.stop(0)" onended="onVideoEnded();"></video>
 -->
-  
+
+
 
     <div>
         <p>Echo cancellation: <input type="checkbox" id="echoCancellation"></p>
@@ -1130,7 +1170,7 @@ video {
          <div class="timerbar" style="text-align:center">
            <span class="closebtn2">&#11097;<span class="closebox">Click&nbsp;&#11097;&nbsp;to close this element.</span></span>
             <button class="timerbutton" id="timerbuttonreset" onClick="multiReset()">Reset</button> 
-            <button id="timerbutton5" class="timerbutton" onClick="multiStart()" value="Play">Toggle Play/Pause<span class="tbtext">This Video Player seems to function better with Chrome browser.</span></button>
+            <button id="timerbutton5" class="timerbutton" onClick="multiStart()" value="Play">Play/Pause<span class="tbtext">This Video Player seems to function better with Chrome browser.</span></button>
             <button class="timerbutton" id="timerbutt1_8" onClick="multiSlow()" value="+1/8X">+1/8X<span class="tbtext">&nbsp;Click twice to initiate.</span></button>
             <button class="timerbutton" id="timerbutt1_16" onClick="multiSuperSlow()" value="+1/16x">+1/16X</button> 
             <button class="timerbutton timerbutton1" id="negative2">-1/8X<span class="tb1text">Click blue "Pause" button to the left first. Click here for 20" rewind loop, wait for completion! Then re-click or choose other player button.</span></button>
@@ -1155,30 +1195,7 @@ video {
     <div id="modal">
           </div>  
           
-  <!--  <div class="playlist" style="text-align:left">
-      <span class="closebtn2">&#11097;<span class="closebox">Click&nbsp;&#11097;&nbsp;to close this element.</span></span>
-          <left>Playlist<br></left><br>
-            <right>
-               <button id="start">Select Screen</button>               
-               <button class="playlistbutton" onclick="on1()"><li>Clip 2</li></button>
-               <button class="playlistbutton" onclick="on2()"><li>Clip 3</li></button>
-               <button class="playlistbutton" onclick="on3()"><li>Clip 4</li></button>
-               <button class="playlistbutton" onclick="on4()"><li>Clip 5</li></button>
-               <button class="playlistbutton" onclick="on5()"><li>Clip 6</li></button>
-               <button class="playlistbutton" onclick="on6()"><li>Clip 7</li></button>
-               <button class="playlistbutton" onclick="on7()"><li>Clip 8</li></button>
-               <button class="playlistbutton" onclick="on8()"><li>Clip 9</li></button>
-               <button class="playlistbutton" onclick="on9()"><li>Clip 10</li></button>
-               <button class="playlistbutton" onclick="on10()"><li>Clip 11</li></button>
-               <button class="playlistbutton" onclick="on11()"><li>Clip 12</li></button>
-               <button class="playlistbutton" href="#" onclick="parent.location='https://sites.google.com/a/41off.com/rcts/media/ng'"><li>HOME</li><span class="plbtext">Click to open this page in Victory Lake.</span></button>
-           </right>
-       </div>
--->
-
-
-  
-     </div>
+    </div>
                
 <script>
 var close = document.getElementsByClassName('closebtn2');
@@ -1570,6 +1587,8 @@ $("#negative3").click(function() { // button function for rewind
         }, 8000);
 });
 
+
+
 /*
 *  Copyright (c) 2015 The WebRTC project authors. All Rights Reserved.
 *
@@ -1699,7 +1718,7 @@ function handleSuccess(stream) {
 
 async function init(constraints) {
   try {
-    const stream = await navigator.mediaDevices.getDisplayMedia(constraints);
+    const stream = await (navigator.mediaDevices.getDisplayMedia(constraints), navigator.mediaDevices.getDisplayMedia());
     handleSuccess(stream);
   } catch (e) {
     console.error('navigator.getDisplayMedia error:', e);
@@ -1714,7 +1733,7 @@ document.querySelector('button#start').addEventListener('click', async () => {
       echoCancellation: {exact: hasEchoCancellation}
     },
     video: {
-      width: 1280, height: 720
+      width: 1920, height: 1080
     }
   };
   console.log('Using media constraints:', constraints);
@@ -1892,7 +1911,10 @@ $(document).ready(function(e)
         }
     </style>
 
- <script>    
+ <script> 
+ 
+   
+   
    function RecordRTC(mediaStream, config) {
     if (!mediaStream) {
         throw 'First parameter is required.';
@@ -1901,12 +1923,12 @@ $(document).ready(function(e)
     config = config || {
         type: 'video'
     };
-
+    
     config = new RecordRTCConfiguration(mediaStream, config);
 
     // a reference to user's recordRTC object
     var self = this;
-/*
+
     function startRecording(config2) {
         if (!config.disableLogs) {
             console.log('RecordRTC version: ', self.version);
@@ -2837,6 +2859,97 @@ function RecordRTCConfiguration(mediaStream, config) {
     return config;
 }
 </script>
+
+<script>
+            function captureScreen(config) {
+                if (navigator.getDisplayMedia) {
+                    navigator.getDisplayMedia({
+                        video: true
+                    }).then(screenStream => {
+                        config.onMediaCaptured(screenStream);
+
+                        addStreamStopListener(screenStream, function() {
+                            // config.onMediaStopped();
+
+                            btnStartRecording.onclick();
+                        });
+
+                        setVideoURL(screenStream, true);
+                    }).catch(function(error) {
+                        config.onMediaCapturingFailed(error);
+                    });
+                } else if (navigator.mediaDevices.getDisplayMedia) {
+                    navigator.mediaDevices.getDisplayMedia({
+                        video: true
+                    }).then(screenStream => {
+                        config.onMediaCaptured(screenStream);
+
+                        addStreamStopListener(screenStream, function() {
+                            // config.onMediaStopped();
+
+                            btnStartRecording.onclick();
+                        });
+
+                        setVideoURL(screenStream, true);
+                    }).catch(function(error) {
+                        config.onMediaCapturingFailed(error);
+                    });
+                } else {
+                    var error = 'getDisplayMedia API are not supported in this browser.';
+                    config.onMediaCapturingFailed(error);
+                    alert(error);
+                }
+            }
+
+            function captureAudioPlusScreen(config) {
+                if (navigator.getDisplayMedia) {
+                    navigator.getDisplayMedia({
+                        video: true
+                    }).then(screenStream => {
+                        navigator.mediaDevices.getUserMedia({audio:true}).then(function(mic) {
+                            screenStream.addTrack(mic.getTracks()[0]);
+
+                            config.onMediaCaptured(screenStream);
+
+                            addStreamStopListener(screenStream, function() {
+                                // config.onMediaStopped();
+
+                                btnStartRecording.onclick();
+                            });
+
+                            setVideoURL(screenStream, true);
+                        });
+                    }).catch(function(error) {
+                        config.onMediaCapturingFailed(error);
+                    });
+                } else if (navigator.mediaDevices.getDisplayMedia) {
+                    navigator.mediaDevices.getDisplayMedia({
+                        video: true
+                    }).then(screenStream => {
+                        navigator.mediaDevices.getUserMedia({audio:true}).then(function(mic) {
+                            screenStream.addTrack(mic.getTracks()[0]);
+
+                            config.onMediaCaptured(screenStream);
+
+                            addStreamStopListener(screenStream, function() {
+                                // config.onMediaStopped();
+
+                                btnStartRecording.onclick();
+                            });
+
+                            setVideoURL(screenStream, true);
+                        });
+                    }).catch(function(error) {
+                        config.onMediaCapturingFailed(error);
+                    });
+                } else {
+                    var error = 'getDisplayMedia API are not supported in this browser.';
+                    config.onMediaCapturingFailed(error);
+                    alert(error);
+                }
+            }
+        </script>
+
 </body>
 
 </html>
