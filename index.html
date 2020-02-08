@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -491,7 +492,8 @@ video{
  opacity: 1;
  color: black;
  transition: opacity 2s;
-}
+} 
+
 .playlist {
     display:inline-block;
     position:absolute;
@@ -536,6 +538,7 @@ video{
    text-decoration:underline;
    transition: opacity 2s;
 }
+
 .playlistbutton {
     text-align: left;
     background-color: transparent;
@@ -1224,6 +1227,27 @@ textarea {
     text-align:center;
 }
 
+#reld2 {
+    border-color:transparent;
+    background-color: transparent;
+    font-weight: normal;
+    color: white;
+    text-align: left;
+    border-width: 3px;
+    border-radius: 10px;
+    border-style:double;
+    width: 160px;
+    height:30px;
+    line-height:10px;
+}
+#reld2:hover {
+    border-color: white;
+    background-color: silver; 
+    color: red;
+    text-align:center;
+}
+
+
 
 #archiv {
     border-color:transparent;
@@ -1282,8 +1306,9 @@ video {
         <button id="record" disabled><li>Start Recording</li></button>
         <button id="play" disabled title="will only Play after recording stopped."><li>Play</li></button>
         <button id="download" disabled title="to your browser downloads folder; filename = ecv.webm(#s)"><li>Download</li></button>
-        <button id="reld" title="Click to reload the video recorder." onclick="window.location.reload(true)"><li>Re-Load Page</li></button>
-        <button id="archiv" title="Click to open Archive player." href="#" onclick="parent.location='HTML5_ArchivePLayer.html'"><li>Archives</li></button>
+        <button id="reld" title="Click to stop recorder after 100'" onclick="timeStop()"><li>15 10' Loops</li></button> 
+        <button id="reld2" title="Click to reload the video recorder." onclick="window.location.reload(true)"><li>Re-Load Page</li></button> 
+    <!--    <button id="archiv" title="Click to open Archive player." href="#" onclick="parent.location='HTML5_ArchivePLayer.html'"><li>Archives</li></button> -->
         <input type="checkbox" id="audioToggle" title="got to chrome://flags - scroll to 'Mirroring Service' -toggle 'Enabled' if Share audio box absent in Share your screen popup" />
          <label for="audioToggle" title="Check the box, then check Share Audio box bottom left of Share Screen Popup">Capture Audio</label>
     <!--<input type="checkbox" id="micAudioToggle" />
@@ -1726,6 +1751,7 @@ let desktopStream;
 const errorMsgElement = document.querySelector('span#errorMsg');
 const recordedVideo = document.querySelector('video#recorded');
 const recordButton = document.querySelector('button#record');
+// const reldButton = document.querySelector('button#reld');
 const audioToggle = document.getElementById('audioToggle');
 const micaudioToggle = document.getElementById('micaudioToggle');
 
@@ -1786,7 +1812,7 @@ function handleDataAvailable(event) {
 function startRecording() {
   recordedBlobs = [];
   let options = {mimeType: 'video/webm; codecs=vp9,vorbis'};
-  if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+   if (!MediaRecorder.isTypeSupported(options.mimeType)) {
     console.error(`${options.mimeType} is not Supported`);
     errorMsgElement.innerHTML = `${options.mimeType} is not Supported`;
     options = {mimeType: 'video/webm; codecs=vp8,vorbis'};
@@ -1808,7 +1834,7 @@ function startRecording() {
     console.error('Exception while creating MediaRecorder:', e);
     errorMsgElement.innerHTML = `Exception while creating MediaRecorder: ${JSON.stringify(e)}`;
     return;
-  }
+}
 
   console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
   recordButton.textContent = 'Stop Recording';
@@ -1817,11 +1843,53 @@ function startRecording() {
   mediaRecorder.onstop = (event) => {
     console.log('Recorder stopped: ', event);
     console.log('Recorded Blobs: ', recordedBlobs);
-  };
+ };
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.start(10); // collect 10ms of data
   console.log('MediaRecorder started', mediaRecorder);
 }
+
+
+function timeStop() {
+   recordButton.textContent = 'Timed Recording';
+   startRecording();
+  
+  var loops = 0;  
+  var timeStop =  setInterval(function(){ 
+      loops += 1;
+    if(loops === 15){
+        clearInterval(timeStop);
+    }
+    //do whatever here..
+    if (recordButton.textContent === 'Stop Recording') {
+    stopRecording();
+    playButton.disabled = false;
+    downloadButton.disabled = false;
+    const blob = new Blob(recordedBlobs, {type: 'video/webm'});
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'ecv.webm';
+      document.body.appendChild(a);
+      a.click();
+       setTimeout(() => {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        }, 100);
+   } 
+     else {
+    startRecording();
+    recordButton.textContent = 'Stop Recording';
+   // playButton.disabled = false;
+   // downloadButton.disabled = false;
+   }
+   setTimeout(() => {
+      startRecording();
+   }, 200);
+ }, 600000);
+}
+
 
 function stopRecording() {
   mediaRecorder.stop();
@@ -1834,7 +1902,6 @@ function handleSuccess(stream) {
   const Video = document.querySelector('video');
   Video.srcObject = stream;
 }
-
 
 async function init(constraints) { 
     try {
