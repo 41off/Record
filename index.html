@@ -1298,7 +1298,7 @@ video {
         <button id="record" disabled=""><li>Start Recording</li></button>
         <button id="play" disabled="" title="will only Play after recording stopped."><li>Play</li></button>
         <button id="download" disabled="" title="to your browser downloads folder; filename = ecv.webm(#s)"><li>Download</li></button>
-        <button id="reld" title="Click Stop Recording to end prior to 48 10&#39 loops" onclick="timeStop()"><li>48 10' Loops</li></button> 
+        <button id="reld" title="Click Stop Recording to end prior to 48 10&#39 Loops, then click Download to save last partial loop" onclick="timeStop()"><li>48 10' Loops</li></button> 
         <button id="reld2" title="Click to reload the video recorder." onclick="window.location.reload(true)"><li>Re-Load Page</li></button> 
     <!--    <button id="archiv" title="Click to open Archive player." href="#" onclick="parent.location='HTML5_ArchivePLayer.html'"><li>Archives</li></button> -->
         <input type="checkbox" id="audioToggle" title="got to chrome://flags - scroll to &#39;Mirroring Service&#39; -toggle &#39;Enabled&#39; if Share audio box absent in Share your screen popup">
@@ -1842,7 +1842,7 @@ function startRecording() {
 
 
 function timeStop() {
-   recordButton.textContent = 'Timed Recording';
+   recordButton.textContent = '48 10&#39 Loops';
    startRecording();
   
   var loops = 0;  
