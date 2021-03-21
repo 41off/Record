@@ -1,33 +1,24 @@
-
 <!DOCTYPE html>
-<html lang="en">
 
-
-<head>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>RCTS WebRTC Video Screen Recording</title>
     
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
+    
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel='icon' href='favicon.ico' type='image/x-icon'/ >
+    <link rel="icon" href="https://rec.41off.com/favicon.ico" type="image/x-icon">
     
-<?xml version="1.0" encoding="utf-8"?>
-  <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<!--?xml version="1.0" encoding="utf-8"?-->
+  </head><body onload="onload();"><manifest xmlns:android="http://schemas.android.com/apk/res/android">
      <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-        <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        <application android:allowbackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundicon="@mipmap/ic_launcher_round" android:supportsrtl="true" android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER">
+            </category></action></intent-filter>
         </activity>
     </application>    
  
@@ -1289,28 +1280,28 @@ video {
 
 
 
-<body onload="onload();">
+
 
  <div id="recorded">
  
-    <video id="recorded" playsinline loop controls type="video/webm" onclick="this.paused? ClickPause():ClickStart(); this.paused? timer.start(10):timer.pause(0)">
-        <source type='video/webm; codecs="vp8, opus"'>
-        <source type='video/webm; codecs="vp9, opus"'>
-        <source type='video/webm; codecs="vp8, vorbis"'>
-        <source type='video/webm; codecs="vp9, vorbis"'>
+    <video id="recorded" playsinline="" loop="" controls="" type="video/webm" onclick="this.paused? ClickPause():ClickStart(); this.paused? timer.start(10):timer.pause(0)" style="left: 0px; top: 0px;">
+        <source type="video/webm; codecs=&quot;vp8, opus&quot;">
+        <source type="video/webm; codecs=&quot;vp9, opus&quot;">
+        <source type="video/webm; codecs=&quot;vp8, vorbis&quot;">
+        <source type="video/webm; codecs=&quot;vp9, vorbis&quot;">
     </video>
    <!--   <audio id="record" playsinline loop controls>Your browser does not support the<code>audio</code> element.</audio>  -->
     
      <div class="playlist" style="text-align:center">
-        <a href='index.html' download title="Click here to load Recorder locally from browser, then choose display application."><li>Run on Local</li></a>
+        <a href="https://rec.41off.com/index.html" download="" title="Click here to load Recorder locally from browser, then choose display application."><li>Run on Local</li></a>
         <button id="chrome" title="Only works with Opera, Chrome (needed for audio) or Firefox browsers. Click for Popup"><li>Select Screen</li></button>
-        <button id="record" disabled><li>Start Recording</li></button>
-        <button id="play" disabled title="will only Play after recording stopped."><li>Play</li></button>
-        <button id="download" disabled title="to your browser downloads folder; filename = ecv.webm(#s)"><li>Download</li></button>
-        <button id="reld" title="Click to stop recorder after 100'" onclick="timeStop()"><li>15 10' Loops</li></button> 
+        <button id="record" disabled=""><li>Start Recording</li></button>
+        <button id="play" disabled="" title="will only Play after recording stopped."><li>Play</li></button>
+        <button id="download" disabled="" title="to your browser downloads folder; filename = ecv.webm(#s)"><li>Download</li></button>
+        <button id="reld" title="Click Stop Recording to end prior to 48 10&#39 loops" onclick="timeStop()"><li>48 10' Loops</li></button> 
         <button id="reld2" title="Click to reload the video recorder." onclick="window.location.reload(true)"><li>Re-Load Page</li></button> 
     <!--    <button id="archiv" title="Click to open Archive player." href="#" onclick="parent.location='HTML5_ArchivePLayer.html'"><li>Archives</li></button> -->
-        <input type="checkbox" id="audioToggle" title="got to chrome://flags - scroll to 'Mirroring Service' -toggle 'Enabled' if Share audio box absent in Share your screen popup" />
+        <input type="checkbox" id="audioToggle" title="got to chrome://flags - scroll to &#39;Mirroring Service&#39; -toggle &#39;Enabled&#39; if Share audio box absent in Share your screen popup">
          <label for="audioToggle" title="Check the box, then check Share Audio box bottom left of Share Screen Popup">Capture Audio</label>
     <!--<input type="checkbox" id="micAudioToggle" />
          <label for="micAudioToggle">Capture Audio from Microphone</label>
@@ -1324,27 +1315,26 @@ video {
     </div>
       
          <div class="timerbar" style="text-align:center">
-           <span class="closebtn2">&#11097;<span class="closebox">Click&nbsp;&#11097;&nbsp;to close this element.</span></span>
-            <button class="timerbutton" id="timerbuttonreset" onClick="multiReset()">Reset</button> 
-            <button id="timerbutton5" class="timerbutton" onClick="multiStart()" value="Play">Play/Pause<span class="tbtext">This Video Player seems to function better with Opera or Chrome browser.</span></button>
-            <button class="timerbutton" id="timerbutt1_8" title="Click twice to initiate." onClick="multiSlow()" value="+1/8X">+1/8X</button>
-            <button class="timerbutton" id="timerbutt1_16" onClick="multiSuperSlow()" value="+1/16x">+1/16X</button> 
+           <span class="closebtn2">⭙<span class="closebox">Click&nbsp;⭙&nbsp;to close this element.</span></span>
+            <button class="timerbutton" id="timerbuttonreset" onclick="multiReset()">Reset</button> 
+            <button id="timerbutton5" class="timerbutton" onclick="multiStart()" value="Play">Play/Pause<span class="tbtext">This Video Player seems to function better with Opera or Chrome browser.</span></button>
+            <button class="timerbutton" id="timerbutt1_8" title="Click twice to initiate." onclick="multiSlow()" value="+1/8X">+1/8X</button>
+            <button class="timerbutton" id="timerbutt1_16" onclick="multiSuperSlow()" value="+1/16x">+1/16X</button> 
             <button class="timerbutton timerbutton1" id="negative2">-1/8X<span class="tb1text">Click blue "Pause" button to the left first. Click here for 20" rewind loop, wait for completion! Then re-click or choose other player button.</span></button>
-            <button class="timerbutton timerbutton1" id="negative" value="-1X">-1X<span class="tb1text">Click blue "Pause" button to the left first. Click here for 20" rewind loop, wait for completion! Then re-click or choose other player button.</span></button > 
-            <button class="timerbutton" id="speed4x" onClick="multiFwd()" value="4X">+4X</button>
-            <button class="timerbutton" id="speed16x" onClick="multiSupFwd()" value="16X">+16X</button>                       
+            <button class="timerbutton timerbutton1" id="negative" value="-1X">-1X<span class="tb1text">Click blue "Pause" button to the left first. Click here for 20" rewind loop, wait for completion! Then re-click or choose other player button.</span></button> 
+            <button class="timerbutton" id="speed4x" onclick="multiFwd()" value="4X">+4X</button>
+            <button class="timerbutton" id="speed16x" onclick="multiSupFwd()" value="16X">+16X</button>                       
             <button class="timerbutton timerbutton1" id="negative3">-4X<span class="tb1text">Click blue "Pause" button to the left first. Click here for 20" rewind loop, wait for completion! Then re-click or choose other player button.</span></button>
             <button class="timerbutton" id="timerbuttonreset" onclick="on0()">Repeat</button> 
-            <button class="timerbutton timerbutton6" href="#" onclick='window.open("https://41off.github.io/Player/");return false;' title="Player should play selected clips that have been saved to your Downloads folder.">[\+/]<span class="tbtext">&nbsp;Click to open Archive Player.</span></button>
+            <button class="timerbutton timerbutton6" href="#" onclick="window.open(&quot;https://41off.github.io/Player/&quot;);return false;" title="Player should play selected clips that have been saved to your Downloads folder.">[\+/]<span class="tbtext">&nbsp;Click to open Archive Player.</span></button>
           </div> 
                
          <div class="timer">
              <span class="minute">00</span>:<span class="second">00</span>.<span class="milli">00</span>
-             <span class="closebtn2">&#11097;<div><span class="closebox">Click&nbsp;&#11097;&nbsp;to close this element.</span></div></span>
+             <span class="closebtn2">⭙<div><span class="closebox">Click&nbsp;⭙&nbsp;to close this element.</span></div></span>
          </div>
           
-         <div class="controls"><span class="closebtn2">&#11097;<span class="closeboxleft">Click&nbsp;&#11097;&nbsp;to close this element.</span></span>
-           </div> 
+         <div class="controls"><span class="closebtn2">⭙<span class="closeboxleft">Click&nbsp;⭙&nbsp;to close this element.</span></span><br><center>Zoom Controls</center><button class="zoomin">+</button><button class="zoomout">-</button><button class="left">⇠</button><button class="right">⇢</button><button class="up">⇡</button><button class="down">⇣</button><button class="rotateleft">↻</button><button class="rotateright">↺</button><button class="reset">RESET</button></div> 
    
     <div id="modal">
           </div>  
@@ -1858,7 +1848,7 @@ function timeStop() {
   var loops = 0;  
   var timeStop =  setInterval(function(){ 
       loops += 1;
-    if(loops === 15){
+    if(loops === 48){
         clearInterval(timeStop);
     }
     //do whatever here..
@@ -2081,8 +2071,6 @@ $(document).ready(function(e)
 });
 </script>
 
+</manifest>
 </body>
-
-</head>
-
 </html>
