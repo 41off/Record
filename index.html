@@ -1284,11 +1284,9 @@ video {
 
  <div id="recorded">
  
-    <video id="recorded" playsinline="" loop="" controls="" type="video/webm" onclick="this.paused? ClickPause():ClickStart(); this.paused? timer.start(10):timer.pause(0)" style="left: 0px; top: 0px;">
-        <source type="video/webm; codecs=&quot;vp8, opus&quot;">
-        <source type="video/webm; codecs=&quot;vp9, opus&quot;">
-        <source type="video/webm; codecs=&quot;vp8, vorbis&quot;">
-        <source type="video/webm; codecs=&quot;vp9, vorbis&quot;">
+    <video id="recorded" playsinline="" loop="" controls="" type="video/mp4" onclick="this.paused? ClickPause():ClickStart(); this.paused? timer.start(10):timer.pause(0)" style="left: 0px; top: 0px;">
+        <source type="video/mp4; codecs=avc1.424028, mp4a.40.2;">
+        <source type="video/mp4; codecs=avc1.424028, mp4a.40.2;">
     </video>
    <!--   <audio id="record" playsinline loop controls>Your browser does not support the<code>audio</code> element.</audio>  -->
     
@@ -1297,7 +1295,7 @@ video {
         <button id="chrome" title="Only works with Opera, Chrome (needed for audio) or Firefox browsers. Click for Popup"><li>Select Screen</li></button>
         <button id="record" disabled=""><li>Start Recording</li></button>
         <button id="play" disabled="" title="will only Play after recording stopped."><li>Play</li></button>
-        <button id="download" disabled="" title="to your browser downloads folder; filename = ecv.webm(#s)"><li>Download</li></button>
+        <button id="download" disabled="" title="to your browser downloads folder; filename = ecv.mp4(#s)"><li>Download</li></button>
         <button id="reld" title="Click Stop Recording to end prior to 48 10&#39 Loops, then click Download to save last partial loop" onclick="timeStop()"><li>48 10' Loops</li></button> 
         <button id="reld2" title="Click to reload the video recorder." onclick="window.location.reload(true)"><li>Re-Load Page</li></button> 
     <!--    <button id="archiv" title="Click to open Archive player." href="#" onclick="parent.location='HTML5_ArchivePLayer.html'"><li>Archives</li></button> -->
@@ -1760,7 +1758,7 @@ recordButton.addEventListener('click', () => {
 
 const playButton = document.querySelector('button#play');
 playButton.addEventListener('click', () => {
-  const superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
+  const superBuffer = new Blob(recordedBlobs, {type: 'video/mp4'});
   recordedVideo.src = null;
   recordedVideo.srcObject = null;
   recordedVideo.volume = 1.0;
@@ -1773,12 +1771,12 @@ playButton.addEventListener('click', () => {
 
 const downloadButton = document.querySelector('button#download');
 downloadButton.addEventListener('click', () => {
-  const blob = new Blob(recordedBlobs, {type: 'video/webm'});
+  const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.style.display = 'none';
   a.href = url;
-  a.download = 'ecv.webm';
+  a.download = 'ecv.mp4';
   document.body.appendChild(a);
   a.click();
   setTimeout(() => {
@@ -1789,7 +1787,7 @@ downloadButton.addEventListener('click', () => {
 
 function handleSourceOpen(event) {
   console.log('MediaSource opened');
-  sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs=vp9,vorbis');
+  sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs=avc1.424028, mp4a.40.2');
   console.log('Source buffer: ', sourceBuffer);
 }
 
@@ -1802,15 +1800,15 @@ function handleDataAvailable(event) {
 
 function startRecording() {
   recordedBlobs = [];
-  let options = {mimeType: 'video/webm; codecs=vp9,vorbis'};
+  let options = {mimeType: 'video/mp4; codecs=avc1.424028, mp4a.40.2'};
    if (!MediaRecorder.isTypeSupported(options.mimeType)) {
     console.error(`${options.mimeType} is not Supported`);
     errorMsgElement.innerHTML = `${options.mimeType} is not Supported`;
-    options = {mimeType: 'video/webm; codecs=vp8,vorbis'};
+    options = {mimeType: 'video/mp4; codecs=avc1.424028, mp4a.40.2'};
     if (!MediaRecorder.isTypeSupported(options.mimeType)) {
       console.error(`${options.mimeType} is not Supported`);
       errorMsgElement.innerHTML = `${options.mimeType} is not Supported`;
-      options = {mimeType: 'video/webm'};
+      options = {mimeType: 'video/mp4'};
       if (!MediaRecorder.isTypeSupported(options.mimeType)) {
         console.error(`${options.mimeType} is not Supported`);
         errorMsgElement.innerHTML = `${options.mimeType} is not Supported`;
@@ -1856,12 +1854,12 @@ function timeStop() {
     stopRecording();
     playButton.disabled = false;
     downloadButton.disabled = false;
-    const blob = new Blob(recordedBlobs, {type: 'video/webm'});
+    const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.style.display = 'none';
       a.href = url;
-      a.download = 'ecv.webm';
+      a.download = 'ecv.mp4';
       document.body.appendChild(a);
       a.click();
        setTimeout(() => {
